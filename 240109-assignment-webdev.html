@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhu Nguyen - Branding & Product Development</title>
+    
+    <style>
+        /* --- 1. Global Styles --- */
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: Georgia, serif;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- 2. Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.9);
+            border-bottom: 1px solid #333;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            font-family: Georgia, serif; 
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* --- 3. Header/Hero Section --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 60px; /* Offset for fixed nav */
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex-basis: 60%;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            font-family: Georgia, serif;
+            color: #aaa;
+        }
+
+        .hero-image {
+            flex-basis: 35%;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid #333;
+            object-fit: cover;
+        }
+
+        /* --- 4. Section Styles --- */
+        section {
+            padding-top: 60px; /* Offset for nav anchors */
+        }
+
+        /* --- General Tab Styles (used by About & Services) --- */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #f0f0f0;
+            border: 1px solid #555; 
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold; 
+        }
+        .tab-button.active {
+            background-color: #f0f0f0; /* Light active */
+            color: #121212; /* Dark text */
+            border-color: #f0f0f0;
+        }
+        .tab-content {
+            display: none; /* Hidden by default */
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #1e1e1e; /* Moved from specific #about/#services */
+        }
+        .tab-content.active {
+            display: block; /* Shown by JS */
+        }
+
+        /* About Section (TAB LAYOUT) */
+        #about .about-intro {
+            font-size: 1.25rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        #about .tab-content ul {
+            padding-left: 0;
+            list-style: none; 
+        }
+        #about .tab-content li {
+             margin-bottom: 15px; 
+             line-height: 1.4;
+             font-size: 1.1rem;
+        }
+        #about .tab-content li span { /* For subtitles like (Class of 2024) */
+            display: block;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+
+        /* Experience Section (LAYOUT WITH DATES) */
+        .experience-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #333;
+        }
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        .experience-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        .experience-item p {
+            margin: 0;
+            font-size: 1rem;
+            color: #aaa;
+        }
+        .experience-date {
+            font-size: 1rem;
+            color: #aaa;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-left: 20px;
+            text-align: right;
+        }
+
+        /* Services Section */
+        .tab-content-inner {
+            display: flex;
+            gap: 30px;
+        }
+        .tab-content-inner div {
+            flex: 1;
+        }
+        .tools-list {
+            margin-top: 30px; /* Added margin to separate from tabs */
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        .tools-list ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .project-card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .project-card h3 {
+            padding: 20px;
+            margin: 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        /* Certificates Section */
+        .certificate-list {
+            list-style: none;
+            padding: 0;
+        }
+        .certificate-item {
+            background-color: #1e1e1e;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #333;
+        }
+        .certificate-item img {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        .certificate-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .certificate-item p {
+            margin: 0;
+            color: #aaa;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #1a1a1a;
+        }
+        .contact-form {
+            display: flex;
+            gap: 20px;
+        }
+        .contact-details {
+            flex: 1;
+        }
+        .contact-form form {
+            flex: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        .form-group input,
+        .form-group textarea {
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 12px;
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background-color: #bb86fc;
+            color: #121212;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 200px;
+            grid-column: 1;
+        }
+        .contact-info {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-info li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .contact-info strong {
+            color: #aaa;
+            display: inline-block;
+            width: 70px;
+        }
+
+        /* --- 5. Assignment Part 2: Notebook (DARK THEME) --- */
+        #notebook {
+            background-color: #1a1a1a; 
+            color: #f0f0f0; 
+        }
+        #notebook h2 {
+             border-bottom-color: #555; 
+        }
+        #notebook p {
+            color: #aaa; 
+        }
+        #notebook-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #444; 
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box; 
+            background-color: #2b2b2b; 
+            color: #f0f0f0; 
+        }
+        #add-note-btn {
+            background-color: #bb86fc; 
+            color: #121212; 
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #add-note-btn:hover {
+            background-color: #a06cd5; 
+        }
+        #notes-list {
+            margin-top: 20px;
+        }
+        .note-item {
+            background-color: #1e1e1e; 
+            border: 1px solid #333; 
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: #f0f0f0; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">Nhu Nguyen</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#notebook">Notebook</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Greetings! <br> I'm Nhu Nguyen</h1>
+                    <p>Welcome to my Vault.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="images/your-profile-pic.jpg" alt="Nhu Nguyen">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <p class="about-intro">"I am a hustle-and-bustle city girl, an amateur blogger, a mother's stubborn daughter, a curious life-long learner, and a protagonist for 4 years. Above all, a branding and product development enthusiast."</p>
+                
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="tab-academic">Academic Background</button>
+                    <button class="tab-button" data-tab="tab-foundation">Foundation</button>
+                </div>
+
+                <div id="tab-academic" class="tab-content active">
+                    <ul>
+                        <li>Tran Dai Nghia High School For The Gifted
+                            <span>Class of 2024</span>
+                        </li>
+                        <li>Fulbright University Viet Nam
+                            <span>Class of 2028 Dean's Scholarship</span>
+                        </li>
+                        <li>7.5 IELTS Overall
+                            <span>British Council, Sep 2023</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="tab-foundation" class="tab-content">
+                    <ul>
+                        <li>Tran Dai Nghia High School's Press and Media Club
+                            <span>Executive Board Member & Leader of Media Team (2022)</span>
+                        </li>
+                        <li>Fulbright Admission Team
+                            <span>Fulbright Buddies Gen 5.1 (2023)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2>My Hands-on Experiences</h2>
+                <div class="experience-list">
+                    
+                    <div class="experience-item">
+                        <div>
+                            <h3>Sales and Marketing Intern</h3>
+                            <p>VOX Cool</p>
+                        </div>
+                        <p class="experience-date">2025 - Present</p>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div>
+                            <h3>Customer Experience Assistant</h3>
+                            <p>Fulbright Admission Team</p>
+                        </div>
+                        <p class="experience-date">2025</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div>
+                            <h3>Content Creator</h3>
+                            <p>Vietnam Youth4Climate - UNDP Vietnam</p>
+                        </div>
+                        <p class="experience-date">2024</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div>
+                            <h3>University Representative Assistant</h3>
+                            <p>ISC Education</p>
+                        </div>
+                        <p class="experience-date">2024</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <section id="services">
+            <div class="container">
+                <h2>My lemme-work-for-you Services</h2>
+                
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="tab-1">Brand Strategy</button>
+                    <button class="tab-button" data-tab="tab-2">Brand Expression</button>
+                    <button class="tab-button" data-tab="tab-3">IMC Plan</button>
+                    <button class="tab-button" data-tab="tab-4">Market Research</button>
+                </div>
+
+                <div id="tab-1" class="tab-content active">
+                    <div class="tab-content-inner">
+                        <div>
+                            <h3>Brand Substance & Strategy</h3>
+                            <p>From a comprehensive Brand Guideline to a heart-winning Credential, let's me help to advocate your brand.</p>
+                        </div>
+                        <div>
+                            <h3>My Set of Knowledge</h3>
+                            <ul>
+                                <li>Understanding audience & customers</li>
+                                <li>Positioning brand in the competition arena</li>
+                                <li>Marking brand differences and distinctions</li>
+                                <li>Identifying brand assets (purpose, vision, mission, values)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-2" class="tab-content">
+                    <div class="tab-content-inner">
+                        <div>
+                            <h3>Brand Identity & Communication</h3>
+                            <p>Through visual expression & verbal storytelling, I ensure every aspect of your brand communicates a consistent and impactful message to your target audience.</p>
+                        </div>
+                        <div>
+                            <h3>My Set of Knowledge</h3>
+                            <ul>
+                                <li>Resonating brand persona with target customers</li>
+                                <li>Crafting compelling brand communication assets</li>
+                                <li>Designing brand identity and ensuring brand presence in across the defined touchpoints</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-3" class="tab-content">
+                    <div class="tab-content-inner">
+                        <div>
+                            <h3>IMC Plan</h3>
+                            <p>Revolving around your strategies and objectives to come up with a strategic execution across different integrated channels.</p>
+                        </div>
+                        <div>
+                            <h3>My Set of Knowledge</h3>
+                            <ul>
+                                <li>Traditional Advertising</li>
+                                <li>Digital Marketing</li>
+                                <li>Influencer Marketing</li>
+                                <li>Public Relations</li>
+                                <li>Strategic & Creative Planning</li>
+                                <li>Trade Marketing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-4" class="tab-content">
+                    <div class="tab-content-inner">
+                        <div>
+                            <h3>Market Research</h3>
+                            <p>I bring up valuable insights and critical analysis to help brand answer their questions on the market, the industry, their customers, their products etc. to make informed decisions.</p>
+                        </div>
+                        <div>
+                            <h3>My Set of Knowledge</h3>
+                            <ul>
+                                <li>Leveraging methodologies and marketing frameworks in research & analysis</li>
+                                <li>Understanding market trends & market segments</li>
+                                <li>Analyzing competitive landscape & consumer insights</li>
+                                <li>Identifying challenges & opportunities in the marketplace</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="tools-list">
+                    <h3>Tools I Use</h3>
+                    <p><strong>Design Tools:</strong> Ai, Ps, Canva, Figma</p>
+                    <p><strong>Office Tools:</strong> Office 365, Trello, HubSpot, Notion</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>My I-made-it Projects</h2>
+                <div class="project-grid">
+                    
+                    <div class="project-card">
+                        <img src="images/abc.jpg" alt="Sensor Lab 1">
+                        <h3>Sensor, Measurement and Analysis Lab 1</h3>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="images/abc1.jpg" alt="Sensor Lab 2">
+                        <h3>Sensor, Measurement and Analysis Lab 2</h3>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="images/abc2.jpg" alt="Project Tank">
+                        <h3>Design System Think Midterm Project: Tank</h3>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="images/abc3.jpg" alt="Vibrating Wristband">
+                        <h3>Design System Think Final Project: Smart Vibrating Wristband Alarm</h3>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates">
+            <div class="container">
+                <h2>My Versace-on-the-wall Certificates</h2>
+                <ul class="certificate-list">
+                    <li class="certificate-item">
+                        <img src="images/telos-logo.png" alt="TELOS Academy Logo">
+                        <div>
+                            <h3>UI/UX Design</h3>
+                            <p>Issued by: TELOS Academy Vietnam</p>
+                        </div>
+                    </li>
+                    <li class="certificate-item">
+                        <img src="images/telos-logo.png" alt="TELOS Academy Logo">
+                        <div>
+                            <h3>Figma</h3>
+                            <p>Issued by: TELOS Academy Vietnam</p>
+                        </div>
+                    </li>
+                    <li class="certificate-item">
+                        <img src="images/telos-logo.png" alt="TELOS Academy Logo">
+                        <div>
+                            <h3>Product Design & Breaking Into Product Development</h3>
+                            <p>Issued by: TELOS Academy Vietnam</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Let's grab a coffee, shall we?</h2>
+                <p>You can just simply leave a hi 👋</p>
+                <div class="contact-form">
+                    
+                    <form action="#" method="POST"> <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send to Nhu</button>
+                    </form>
+
+                    <div class="contact-details">
+                        <h3>Follow me</h3>
+                        <ul class="contact-info">
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Facebook</a></li>
+                        </ul>
+                        <br>
+                        <h3>Contact Info</h3>
+                        <ul class="contact-info">
+                            <li><strong>Email:</strong> npqnhu.work@gmail.com</li>
+                            <li><strong>Tel:</strong> +84 918718738</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="notebook">
+            <div class="container">
+                <h2>My Personal Notebook</h2>
+                <p>Type your note below and click 'Add Note'. Notes will appear below and will not be saved after page reload.</p>
+                
+                <textarea id="notebook-textarea" placeholder="Write your note here..."></textarea>
+                
+                <button id="add-note-btn">Add Note</button>
+
+                <h3>Notes:</h3>
+                <div id="notes-list">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        /*
+        * JAVASCRIPT FOR PART 1: TABBED SECTIONS
+        * This function now handles *both* tab sections (About & Services)
+        * by scoping the querySelectors to the section ID.
+        */
+        
+        function setupTabs(sectionId) {
+            const tabContainer = document.querySelector(sectionId);
+            if (!tabContainer) return; // Exit if section not found
+
+            const tabButtons = tabContainer.querySelectorAll('.tab-button');
+            const tabContents = tabContainer.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTabId = button.getAttribute('data-tab');
+                    const targetTabContent = tabContainer.querySelector('#' + targetTabId);
+
+                    // 1. Remove 'active' class from all buttons and contents *within this section*
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // 2. Add 'active' class to the clicked button and its target content
+                    button.classList.add('active');
+                    if (targetTabContent) {
+                        targetTabContent.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        /*
+        * JAVASCRIPT FOR PART 2: NOTEBOOK FUNCTION
+        */
+        
+        function setupNotebook() {
+            const addNoteButton = document.getElementById('add-note-btn');
+            const noteInput = document.getElementById('notebook-textarea');
+            const notesList = document.getElementById('notes-list');
+
+            if (!addNoteButton) return; // Exit if notebook elements aren't found
+
+            addNoteButton.addEventListener('click', () => {
+                const noteText = noteInput.value.trim(); 
+
+                if (noteText === "") {
+                    alert("Please type a note before adding.");
+                    return; 
+                }
+
+                const newNoteElement = document.createElement('div');
+                newNoteElement.classList.add('note-item'); 
+                newNoteElement.textContent = noteText;
+
+                notesList.appendChild(newNoteElement);
+
+                noteInput.value = "";
+            });
+        }
+
+
+        // Wait for the DOM to be fully loaded before running the scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs('#about');      // Initialize the About tabs
+            setupTabs('#services');   // Initialize the Services tabs
+            setupNotebook();          // Initialize the Notebook
+        });
+    </script>
+
+</body>
+</html>
